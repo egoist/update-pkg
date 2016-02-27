@@ -1,0 +1,38 @@
+{
+  "name": "update-pkg",
+  "version": "0.0.0",
+  "description": "Update package.json",
+  "license": "MIT",
+  "repository": "EGOIST/update-pkg",
+  "bin": "cli.js",
+  "author": {
+    "name": "EGOIST",
+    "email": "0x142857@gmail.com",
+    "url": "github.com/egoist"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "xo && ava"
+  },
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
+  "keywords": [
+    "npm",
+    "package"
+  ],
+  "devDependencies": {
+    "ava": "^0.10.0",
+    "xo": "^0.12.1"
+  },
+  "xo": {
+    "semicolon": false
+  },
+  "dependencies": {
+    "fs-promise": "^0.4.1",
+    "minimist": "^1.2.0"
+  }
+}

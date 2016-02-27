@@ -1,6 +1,6 @@
 {
   "name": "update-pkg",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Update package.json",
   "license": "MIT",
   "repository": "EGOIST/update-pkg",

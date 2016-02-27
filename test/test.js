@@ -9,6 +9,6 @@ test.before(() => {
 test('main', async t => {
 	const data = pkg.data('./')
 	data.name = 'yep'
-	pkg.update(data)
+	await pkg.update(data)
 	t.is(require('./package').name, 'yep')
 })

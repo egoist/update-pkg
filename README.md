@@ -52,6 +52,10 @@ Second argument is `dir`,  the directory to resolve `package.json`.
 
 Return `undefined`.
 
+### .updateSync
+
+Same options but synchronously.
+
 ## License
 
 MIT © [EGOIST](https://github.com/egoist)

@@ -1,24 +1,43 @@
 'use strict'
+const fs = require('fs')
+const path = require('path')
+const pify = require('pify')
+const mkdirp = require('mkdirp')
+const dotProp = require('dot-prop')
 
-var fs = require('fs')
-var fsPromise = require('fs-promise')
-var path = require('path')
-
-function pjson(dir) {
-	dir = dir || process.cwd()
+function resolvePkg(dir) {
+	dir = dir || './'
 	return path.resolve(dir, 'package.json')
 }
 
-module.exports.data = function data(dir) {
-	return require(pjson(dir))
-}
+module.exports = class Pkg {
+	constructor(cwd) {
+		this.pkg = resolvePkg(cwd)
+		try {
+			this.data = require(this.pkg)
+		} catch (err) {
+			if (err.code === 'ENOENT') {
+				mkdirp.sync(this.pkg)
+				this.data = {}
+			}
+		}
+	}
 
-module.exports.update = function update(newData, dir) {
-	var content = JSON.stringify(newData, null, 2)
-	return fsPromise.writeFile(pjson(dir), content, 'utf8')
-}
+	set(prop, value) {
+		dotProp.set(this.data, prop, value)
+		return this
+	}
 
-module.exports.updateSync = function updateSync(newData, dir) {
-	var content = JSON.stringify(newData, null, 2)
-	return fs.writeFileSync(pjson(dir), content, 'utf8')
+	get(prop) {
+		return dotProp.get(this.data, prop)
+	}
+
+	save() {
+		return pify(fs.writeFile)(this.pkg, JSON.stringify(this.data, null, 2), 'utf8')
+	}
+
+	saveSync() {
+		fs.writeFileSync(this.pkg, JSON.stringify(this.data, null, 2), 'utf8')
+		return this
+	}
 }

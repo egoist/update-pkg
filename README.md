@@ -11,50 +11,53 @@ $ npm install --save update-pkg
 ## Usage
 
 ```js
-const pkg = require('update-pkg')
+const Pkg = require('update-pkg')
 
-const data = pkg.data()
-data.name = 'fancy-package'
-pkg.update(data)
-```
+const pkg = new Pkg()
+pkg.data //=> package.json object
 
-## CLI
-
-### Install
-
-```bash
-$ npm install -g update-pkg
-```
-
-### Usage
-
-```bash
-$ update-pkg --name fancy-package
+pkg.set('author.name', 'EGOIST')
+pkg.saveSync()
+// or Promise
+pkg.save().then(/* ... */)
 ```
 
 ## API
 
+### new Pkg(cwd)
+
+Return a new Pkg instance and would resolve `package.json` located at `cwd` folder. Default `cwd` is `./`.
+
+If `{cwd}/package.json` does not exist, a new `package.json` will be created there.
+
 ### .data
 
-Type: `function`
+Type: `object`<br>
+Default: `{}`
 
-First argument is `dir`,  the directory to resolve `package.json`.
+The parsed content of `package.json`.
 
-Return the content of `package.json` as object, throw error if not exists. It's basically `require('./package.json')`.
+### .set(keyPath, value)
 
-### .update
+Set value by the given `keyPath` like `author.name` and `value` like `EGOIST`.
 
-Type: `function`
+### .get(keyPath)
 
-First argument is the new data to update `package.json` to.
+Get value by the given keyPath.
 
-Second argument is `dir`,  the directory to resolve `package.json`.
+### .save()
 
-Return `undefined`.
+Type: `function`<br>
+Return: `Promise`
 
-### .updateSync
+Save data to `package.json`.
 
-Same options but synchronously.
+### .saveSync()
+
+Type: `function`<br>
+Return: `this`
+
+Save data to `package.json` but synchronously.
 
 ## License
 

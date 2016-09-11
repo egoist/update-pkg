@@ -19,6 +19,8 @@ module.exports = class Pkg {
 			if (err.code === 'ENOENT') {
 				mkdirp.sync(this.pkg)
 				this.data = {}
+			} else {
+				throw err
 			}
 		}
 	}

@@ -11,13 +11,17 @@ function resolvePkg(dir) {
 }
 
 module.exports = class Pkg {
-	constructor(cwd) {
+	constructor(cwd, options) {
+		options = options || {}
+		const create = options.create
 		this.pkg = resolvePkg(cwd)
 		try {
 			this.data = require(this.pkg)
 		} catch (err) {
 			if (err.code === 'ENOENT') {
 				mkdirp.sync(this.pkg)
+				this.data = {}
+			} else if (err.code === 'MODULE_NOT_FOUND' && create) {
 				this.data = {}
 			} else {
 				throw err

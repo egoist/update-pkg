@@ -24,11 +24,18 @@ pkg.save().then(/* ... */)
 
 ## API
 
-### new Pkg(cwd)
+### new Pkg(cwd, [options])
 
 Return a new Pkg instance and would resolve `package.json` located at `cwd` folder. Default `cwd` is `./`.
 
-If `{cwd}/package.json` does not exist, a new `package.json` will be created there.
+#### options
+
+##### create
+
+Type: `boolean`<br>
+Default: `false`
+
+Create `package.json` when it does not exist.
 
 ### .data
 

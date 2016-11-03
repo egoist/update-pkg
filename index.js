@@ -38,6 +38,15 @@ module.exports = class Pkg {
 		return dotProp.get(this.data, prop)
 	}
 
+	del(prop) {
+		dotProp.delete(this.data, prop)
+		return this
+	}
+
+	has(prop) {
+		return dotProp.hash(this.data, prop)
+	}
+
 	save() {
 		return pify(fs.writeFile)(this.pkg, JSON.stringify(this.data, null, 2), 'utf8')
 	}

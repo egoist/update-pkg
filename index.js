@@ -44,7 +44,7 @@ module.exports = class Pkg {
 	}
 
 	has(prop) {
-		return dotProp.hash(this.data, prop)
+		return dotProp.has(this.data, prop)
 	}
 
 	save() {

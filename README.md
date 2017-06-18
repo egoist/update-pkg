@@ -56,7 +56,7 @@ Set value by the given `keyPath` like `author.name` and `value` like `EGOIST`.
 
 Append a `value` to specific keyPath.
 
-### .preppend(keyPath, value)
+### .prepend(keyPath, value)
 
 Prepend a `value` to specific keyPath.
 

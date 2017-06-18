@@ -35,7 +35,7 @@ Return a new Pkg instance and would resolve `package.json` located at `cwd` fold
 Type: `boolean`<br>
 Default: `false`
 
-Create `package.json` when it does not exist.
+Create `package.json` when it does not exist, otherwise it will throw an error.
 
 ### .data
 
@@ -47,6 +47,18 @@ The parsed content of `package.json`.
 ### .set(keyPath, value)
 
 Set value by the given `keyPath` like `author.name` and `value` like `EGOIST`.
+
+### .update(keyPath, updater)
+
+`updater` is the function to produce the updated value.
+
+### .append(keyPath, value)
+
+Append a `value` to specific keyPath.
+
+### .preppend(keyPath, value)
+
+Prepend a `value` to specific keyPath.
 
 ### .get(keyPath)
 
